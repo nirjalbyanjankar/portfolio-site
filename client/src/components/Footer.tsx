@@ -9,7 +9,7 @@ const Footer: React.FC<FooterProps> = ({ theme = 'light' }) => {
 
   return (
     <footer className={`py-6 transition-colors duration-300 ${
-      theme === 'light' ? 'bg-gray-50' : 'bg-gray-900/50'
+      theme === 'light' ? 'bg-white' : 'bg-gray-900'
     }`}>
       <div className="max-w-6xl mx-auto px-6">
         <div className={`text-center ${

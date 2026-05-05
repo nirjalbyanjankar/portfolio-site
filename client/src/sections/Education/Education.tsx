@@ -48,7 +48,7 @@ const Education: React.FC<EducationProps> = ({ theme }) => {
 
   return (
     <section id="education" className={`py-24 transition-colors duration-300 ${
-      theme === 'light' ? 'bg-gray-50' : 'bg-gray-800/50'
+      theme === 'light' ? 'bg-white' : 'bg-gray-900'
     }`}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">

@@ -64,7 +64,7 @@ const Skills: React.FC<SkillsProps> = ({ theme }) => {
   };
 
   return (
-    <section id="skills" className={`py-24 transition-colors duration-300 ${theme === 'light' ? 'bg-gray-50' : 'bg-gray-800/50'
+    <section id="skills" className={`py-24 transition-colors duration-300 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'
       }`}>
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Header */}

@@ -8,17 +8,33 @@ interface ExperienceProps {
 const Experience: React.FC<ExperienceProps> = ({ theme }) => {
   const experiences = [
     {
-      role: "Full stack developer",
+      role: "Junior Software Engineer",
       company: "AR Forge Tech",
       location: "Kathmandu, Nepal",
-      period: "December 2025 - Present",
+      period: "March 2026 - Present",
+      type: "Full-time",
+      highlights: [
+        "Promoted from Full Stack Developer Intern based on strong performance and contributions",
+        "Leading development of scalable backend services and responsive UIs",
+        "Collaborating closely with cross-functional teams to deliver high-quality web applications"
+      ],
+      color: "green",
+      side: "left",
+      connectDown: true
+    },
+    {
+      role: "Full Stack Developer Intern",
+      company: "AR Forge Tech",
+      location: "Kathmandu, Nepal",
+      period: "December 2025 - March 2026",
       type: "Internship",
       highlights: [
-        "Developing scalable backend services using NestJS and PostgreSQL",
-        "Building responsive and interactive UIs with Next.js and Material UI",
-        "Collaborating on full-stack web application development"
+        "Developed scalable backend services using NestJS and PostgreSQL",
+        "Built responsive and interactive UIs with Next.js and Material UI",
+        "Collaborated on full-stack web application development"
       ],
-      color: "green"
+      color: "green",
+      side: "left"
     },
     {
       role: "UI/UX Design Intern",
@@ -31,7 +47,8 @@ const Experience: React.FC<ExperienceProps> = ({ theme }) => {
         "Created graphic designs for social media, banners, and logos",
         "Developed frontend pages with JavaScript, HTML, and CSS"
       ],
-      color: "blue"
+      color: "blue",
+      side: "right"
     },
     {
       role: "UI/UX Designer",
@@ -44,7 +61,8 @@ const Experience: React.FC<ExperienceProps> = ({ theme }) => {
         "Created accessible and intuitive website pages",
         "Utilized Figma and stock resources for design assets"
       ],
-      color: "purple"
+      color: "purple",
+      side: "left"
     }
   ];
 
@@ -107,17 +125,17 @@ const Experience: React.FC<ExperienceProps> = ({ theme }) => {
           <div className="space-y-6">
             {experiences.map((exp, index) => {
               const colors = getColorClasses(exp.color);
-              const isEven = index % 2 === 0;
+              const isLeft = exp.side === 'left';
 
               return (
                 <div
                   key={index}
-                  className={`relative flex items-center ${isEven ? 'md:flex-row' : 'md:flex-row-reverse'
+                  className={`relative flex items-center ${isLeft ? 'md:flex-row' : 'md:flex-row-reverse'
                     } animate-fade-in-up`}
                   style={{ animationDelay: `${index * 0.2}s` }}
                 >
                   {/* Horizontal connecting line - Left side */}
-                  {isEven && (
+                  {isLeft && (
                     <div className={`hidden md:block absolute right-1/2 top-1/2 h-0.5 ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'
                       }`}
                       style={{
@@ -128,7 +146,7 @@ const Experience: React.FC<ExperienceProps> = ({ theme }) => {
                   )}
 
                   {/* Horizontal connecting line - Right side */}
-                  {!isEven && (
+                  {!isLeft && (
                     <div className={`hidden md:block absolute left-1/2 top-1/2 h-0.5 ${theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'
                       }`}
                       style={{
@@ -147,12 +165,23 @@ const Experience: React.FC<ExperienceProps> = ({ theme }) => {
                   </div>
 
                   {/* Content Card */}
-                  <div className={`ml-10 md:ml-0 md:w-5/12 ${isEven ? 'md:pr-10' : 'md:pl-10'
+                  <div className={`ml-10 md:ml-0 md:w-5/12 ${isLeft ? 'md:pr-10' : 'md:pl-10'
                     }`}>
-                    <div className={`p-4 rounded-xl border backdrop-blur-sm transition-all duration-200 hover:scale-[1.02] ${theme === 'light'
+                    <div className={`relative p-4 rounded-xl border backdrop-blur-sm transition-all duration-200 hover:scale-[1.02] ${theme === 'light'
                         ? 'bg-white border-gray-200 hover:shadow-md'
                         : 'bg-gray-800/50 border-gray-700 hover:shadow-lg'
                       }`}>
+                      
+                      {/* Connecting Line to next box on the same side */}
+                      {exp.connectDown && (
+                        <div className={`hidden md:block absolute w-1 rounded-full z-0 ${theme === 'light' ? 'bg-green-300' : 'bg-green-700'}`}
+                             style={{
+                               top: '100%',
+                               bottom: '-1.5rem',
+                               left: '2.5rem', 
+                             }}>
+                        </div>
+                      )}
                       {/* Header */}
                       <div className="flex justify-between items-start mb-1">
                         <span className={`text-xs font-medium px-2 py-0.5 rounded ${theme === 'light' ? 'bg-gray-100 text-gray-600' : 'bg-gray-700/50 text-gray-300'
