@@ -69,8 +69,8 @@ const Contact: React.FC<ContactProps> = ({ theme = 'light' }) => {
   };
 
   return (
-    <section id="contact" className={`py-24 transition-colors duration-300 ${
-      theme === 'light' ? 'bg-white' : 'bg-gray-900'
+    <section id="contact" className={`py-20 md:py-24 transition-colors duration-300 ${
+      theme === 'light' ? 'bg-slate-50' : 'bg-gray-950'
     }`}>
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Header */}

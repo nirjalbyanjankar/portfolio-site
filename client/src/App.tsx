@@ -6,15 +6,22 @@ import ScrollToTop from "./components/ScrollToTop";
 import Hero from "./sections/Hero/Hero";
 import About from "./sections/About/About";
 import Skills from "./sections/Skills/Skills";
-import Experience from "./sections/Experience/Experience";
 import Projects from "./sections/Projects/Projects";
 import Contact from "./sections/Contact/Contact";
-import Education from "./sections/Education/Education";
+import Experience from "./sections/Experience/Experience";
 import Footer from "./components/Footer";
 
 function App() {
   const [scrolled, setScrolled] = useState(false);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,31 +52,27 @@ function App() {
         <Navbar theme={theme} toggleTheme={toggleTheme} />
         
         <div className="w-full transition-colors duration-300 ease-in-out">
-          <ScrollSection id="home" theme={theme}>
+          <ScrollSection id="home">
             <Hero theme={theme} />
           </ScrollSection>
           
-          <ScrollSection id="about" theme={theme}>
+          <ScrollSection id="about">
             <About theme={theme} />
           </ScrollSection>
-          
-          <ScrollSection id="education" theme={theme}>
-            <Education theme={theme} />
-          </ScrollSection>
-          
-          <ScrollSection id="skills" theme={theme}>
-            <Skills theme={theme} />
-          </ScrollSection>
-          
-          <ScrollSection id="experience" theme={theme}>
+
+          <ScrollSection id="experience">
             <Experience theme={theme} />
           </ScrollSection>
           
-          <ScrollSection id="projects" theme={theme}>
+          <ScrollSection id="skills">
+            <Skills theme={theme} />
+          </ScrollSection>
+          
+          <ScrollSection id="projects">
             <Projects theme={theme} />
           </ScrollSection>
           
-          <ScrollSection id="contact" theme={theme}>
+          <ScrollSection id="contact">
             <Contact theme={theme} />
           </ScrollSection>
         </div>

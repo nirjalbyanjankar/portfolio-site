@@ -17,12 +17,20 @@ interface ProjectsProps {
 const Projects: React.FC<ProjectsProps> = ({ theme = 'light' }) => {
   const projects: Project[] = [
     {
-      title: "Basketboard",
-      desc: "Full-stack basketball coaching web application with payment integration, real-time chat, and live notifications.",
-      tags: ["React", "Node.js", "Express", "Socket.io", "PostgreSQL", "Khalti API"],
-      icon: Dribbble,
-      github: "https://github.com/nirjaley/basketboard",
-      demo: "https://basketboard-five.vercel.app/"
+      title: "Himalayan Sip",
+      desc: "Cafe website built to showcase the brand with a clean, inviting interface and a modern browsing experience.",
+      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+      icon: Calendar,
+      github: "https://github.com/nirjalbyanjankar/himalayansip",
+      demo: "https://himalayansip.vercel.app/"
+    },
+    {
+      title: "Shangrila Trade Concern",
+      desc: "Website for a gem trading company, built to present the brand with a polished, responsive, and modern web experience.",
+      tags: ["Next.js", "TypeScript", "Tailwind CSS"],
+      icon: Code2,
+      github: "https://github.com/nirjalbyanjankar/shangrila-trade",
+      demo: "https://shangrilatradeconcern.com.np/"
     },
     {
       title: "Khusimwelfare",
@@ -33,12 +41,12 @@ const Projects: React.FC<ProjectsProps> = ({ theme = 'light' }) => {
       demo: "https://www.figma.com/design/ecjsXATM4G01psLtXIB3Dw/KhusimWelfare?node-id=0-1&p=f&t=LCIldZSG0VLKKMhL-0"
     },
     {
-      title: "Portfolio Website",
-      desc: "Modern, responsive portfolio with smooth animations, dark mode, and optimized performance.",
-      tags: ["React", "Vite", "Tailwind", "Framer Motion"],
-      icon: Code2,
-      github: "https://github.com/nirjaley/portfolio-site",
-      demo: "#"
+      title: "Basketboard",
+      desc: "Full-stack basketball coaching web application with payment integration, real-time chat, and live notifications.",
+      tags: ["React", "Node.js", "Express", "Socket.io", "PostgreSQL", "Khalti API"],
+      icon: Dribbble,
+      github: "https://github.com/nirjaley/basketboard",
+      demo: "https://basketboard-five.vercel.app/"
     },
     {
       title: "BondBrokerage",
@@ -54,19 +62,11 @@ const Projects: React.FC<ProjectsProps> = ({ theme = 'light' }) => {
       tags: ["React", "Vite", "JavaScript", "C#", "PostgreSQL", "Tailwind"],
       icon: BookOpen,
       github: "https://github.com/Prajesh-Shrestha-Github/LordofTheReads",
-    },
-    {
-      title: "Eventoraa",
-      desc: "A basic event management application with CRUD functionality, built with React, JavaScript, and Vite for a seamless user experience.",
-      tags: ["React", "JavaScript", "Vite", "CRUD"],
-      icon: Calendar,
-      github: "https://github.com/nirjaley/EventManagementApp",
-      demo: "https://eventoraa.netlify.app/"
     }
   ];
 
   return (
-    <section id="projects" className={`py-24 transition-colors duration-300 ${
+    <section id="projects" className={`py-20 md:py-24 transition-colors duration-300 ${
       theme === 'light' ? 'bg-white' : 'bg-gray-900'
     }`}>
       <div className="max-w-6xl mx-auto px-6">

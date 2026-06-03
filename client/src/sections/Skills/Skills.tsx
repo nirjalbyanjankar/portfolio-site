@@ -64,7 +64,7 @@ const Skills: React.FC<SkillsProps> = ({ theme }) => {
   };
 
   return (
-    <section id="skills" className={`py-24 transition-colors duration-300 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'
+    <section id="skills" className={`py-20 md:py-24 transition-colors duration-300 ${theme === 'light' ? 'bg-slate-50' : 'bg-gray-950'
       }`}>
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Header */}
@@ -144,7 +144,7 @@ const Skills: React.FC<SkillsProps> = ({ theme }) => {
             Always learning and staying curious about emerging technologies
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            {["Full Stack Dvvelopment"].map((tech, idx) => (
+            {["Full Stack Development"].map((tech, idx) => (
               <span
                 key={idx}
                 className={`px-5 py-2.5 rounded-full text-sm font-semibold border-2 transition-all duration-300 hover:scale-110 ${theme === 'light'

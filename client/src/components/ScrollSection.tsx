@@ -5,12 +5,12 @@ interface ScrollSectionProps {
   children: React.ReactNode;
   id?: string;
   className?: string;
-  theme?: 'light' | 'dark';
 }
 
-const ScrollSection = ({ children, id, className = '', theme = 'light' }: ScrollSectionProps) => {
+const ScrollSection = ({ children, id, className = '' }: ScrollSectionProps) => {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { amount: 0.5 });
+  const isHeroSection = id === 'home';
   
   // Smooth scroll behavior for the entire page
   useEffect(() => {
@@ -34,9 +34,7 @@ const ScrollSection = ({ children, id, className = '', theme = 'light' }: Scroll
     <motion.section
       ref={ref}
       id={id}
-      className={`min-h-screen w-full flex items-center justify-center overflow-hidden ${
-        theme === 'light' ? 'bg-white' : 'bg-gray-900'
-      } ${className}`}
+      className={`w-full overflow-hidden scroll-mt-28 ${isHeroSection ? 'min-h-screen' : ''} ${className}`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ 
         opacity: isInView ? 1 : 0.8,
@@ -58,9 +56,9 @@ const ScrollSection = ({ children, id, className = '', theme = 'light' }: Scroll
       }}
     >
       <motion.div 
-        className="container mx-auto px-4 py-20"
+        className="w-full"
         style={{
-          y: y,
+          y: isHeroSection ? 0 : y,
           opacity: isInView ? 1 : 0.8,
           transition: 'opacity 0.6s ease-out',
         }}

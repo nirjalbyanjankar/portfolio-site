@@ -30,7 +30,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
   return (
     <nav className="fixed top-6 left-0 right-0 z-50 flex justify-center animate-slideDown">
       <div className={`rounded-full px-4 py-2 shadow-2xl backdrop-blur-sm hover:shadow-3xl transition-all duration-300 hover:scale-105 ${theme === 'light'
-          ? 'bg-white/90 border border-gray-300/90'
+          ? 'bg-white border border-gray-300'
           : 'bg-black/30 border border-gray-500/60'
         }`}>
         <div className="flex items-center gap-4">
@@ -61,7 +61,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
 
           {/* Middle - Navigation Links */}
           <div className="hidden md:flex items-center gap-6">
-            {['About', 'Education', 'Skills', 'Experience', 'Projects', 'Contact'].map((item) => (
+            {['About', 'Experience', 'Skills', 'Projects', 'Contact'].map((item) => (
               <a
                 key={item}
                 onClick={(e) => {
@@ -171,7 +171,7 @@ const Navbar: React.FC<NavbarProps> = ({ theme, toggleTheme }) => {
           : 'bg-gray-900 border border-gray-700'
         }`}>
           <div className="px-6 py-4 flex flex-col gap-3">
-            {['About', 'Education', 'Skills', 'Experience', 'Projects', 'Contact'].map((item) => (
+            {['About', 'Experience', 'Skills', 'Projects', 'Contact'].map((item) => (
               <button
                 key={item}
                 onClick={() => scrollToSection(item.toLowerCase())}

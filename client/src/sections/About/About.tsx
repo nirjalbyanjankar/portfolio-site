@@ -12,11 +12,11 @@ const About: React.FC<AboutProps> = ({ theme }) => {
 
   const interests = [
     { icon: Music, label: "Music Enthusiast", description: "Love progressive rock (King Crimson, Pink Floyd, Tool) and grunge (Pearl Jam, Alice in Chains)" },
-    { icon: Gamepad2, label: "Gamer", description: "Enjoying titles like Counter-Strike 2 and Red Dead Redemption 2" },
+    { icon: Gamepad2, label: "Gamer", description: "Enjoying titles like Counter-Strike and Red Dead Redemption 2" },
   ];
 
   return (
-    <section id="about" className={`py-24 transition-colors duration-300 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'
+    <section id="about" className={`py-20 md:py-24 transition-colors duration-300 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'
       }`}>
       <div className="max-w-6xl mx-auto px-6">
         {/* Section Header */}
@@ -52,13 +52,11 @@ const About: React.FC<AboutProps> = ({ theme }) => {
                 <div>
                   <h3 className={`text-xl font-bold mb-2 ${theme === 'light' ? 'text-gray-900' : 'text-white'
                     }`}>
-                    Developer & Designer
+                    Full Stack Developer & Designer 
                   </h3>
                   <p className={`leading-relaxed ${theme === 'light' ? 'text-gray-900' : 'text-white'
                     }`}>
-                    I'm a UI/UX Designer and Frontend Developer passionate about building modern, clean,
-                    and efficient digital products. I bridge the gap between design and development,
-                    creating seamless user experiences.
+                    I build thoughtful digital experiences by combining clean development, intuitive design, and a strong eye for detail from idea to launch.
                   </p>
                 </div>
               </div>
@@ -162,6 +160,7 @@ const About: React.FC<AboutProps> = ({ theme }) => {
             </div>
           </div>
         </div>
+
       </div>
 
       <style>{`
@@ -187,6 +186,17 @@ const About: React.FC<AboutProps> = ({ theme }) => {
           }
         }
 
+        @keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
         .animate-fade-in {
           animation: fade-in 1s ease-out;
         }
@@ -197,6 +207,10 @@ const About: React.FC<AboutProps> = ({ theme }) => {
 
         .animate-fade-in-right {
           animation: fade-in-right 0.8s ease-out 0.2s both;
+        }
+
+        .animate-fade-in-up {
+          animation: fade-in-up 0.8s ease-out both;
         }
 
         @keyframes fade-in {

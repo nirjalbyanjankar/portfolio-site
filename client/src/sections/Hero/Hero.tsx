@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Github, Linkedin, Instagram, Mail } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { Github, Instagram, Linkedin, Mail } from 'lucide-react';
 
-// Smooth scroll to a section by ID
 const scrollToSection = (id: string) => {
   const element = document.getElementById(id);
   if (element) {
@@ -42,149 +41,172 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
   }, [displayText, isDeleting]);
 
   return (
-    <section id="hero" className={`relative min-h-screen w-full flex flex-col justify-center items-center text-center transition-colors duration-300 overflow-hidden pb-20 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'
-      }`}>
-      {/* Animated Background Gradient Orbs */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className={`absolute top-1/4 left-1/4 w-96 h-96 rounded-full blur-3xl opacity-20 animate-float-slow ${theme === 'light' ? 'bg-blue-400' : 'bg-blue-600'
-          }`}></div>
-        <div className={`absolute bottom-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl opacity-20 animate-float-slow-delay ${theme === 'light' ? 'bg-purple-400' : 'bg-purple-600'
-          }`}></div>
-        <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-3xl opacity-10 animate-pulse-slow ${theme === 'light' ? 'bg-pink-400' : 'bg-pink-600'
-          }`}></div>
-      </div>
-
-      {/* Main Content */}
-      <div className="relative z-10 w-full max-w-6xl px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-8 sm:gap-12 lg:gap-16">
-          {/* Left Side - Text Content */}
-          <div className="flex-1 text-center lg:text-left">
-
-            {/* Main Heading with Typing Effect */}
-            <h1 className={`text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 animate-fade-in leading-tight ${theme === 'light' ? 'text-gray-900' : 'text-white'
-              }`}>
+    <section
+      id="hero"
+      className={`relative min-h-screen w-full overflow-hidden transition-colors duration-300 ${
+        theme === 'light' ? 'bg-white' : 'bg-gray-900'
+      }`}
+    >
+      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-6xl items-center px-6 pb-24 pt-32 sm:px-8 lg:px-10">
+        <div className="relative flex w-full flex-col items-center gap-14 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
+          <div className="pointer-events-none absolute inset-0 z-0 hidden lg:block">
+            <div className="absolute left-[36%] top-[59%] h-[430px] w-[430px] -translate-x-1/2 -translate-y-1/2">
+              <div
+                className={`h-full w-full rounded-full animate-orbit-left ${
+                  theme === 'light' ? 'bg-blue-200/80' : 'bg-blue-500/28'
+                }`}
+              ></div>
+            </div>
+            <div className="absolute left-[58%] top-[63%] h-[430px] w-[430px] -translate-x-1/2 -translate-y-1/2">
+              <div
+                className={`h-full w-full rounded-full animate-orbit-right ${
+                  theme === 'light' ? 'bg-violet-200/62' : 'bg-violet-500/24'
+                }`}
+              ></div>
+            </div>
+          </div>
+          <div className="relative z-10 w-full max-w-2xl flex-1 text-center lg:text-left">
+            <h1
+              className={`mb-4 text-4xl font-bold leading-[0.95] animate-fade-in sm:text-5xl md:mb-6 md:text-6xl lg:text-7xl ${
+                theme === 'light' ? 'text-gray-900' : 'text-white'
+              }`}
+            >
               Hi, I'm{' '}
               <span className="relative inline-block">
                 {displayText}
                 <span className="animate-blink">|</span>
-              </span>
-              {' '}
+              </span>{' '}
               <span className="inline-block animate-wave">👋</span>
             </h1>
 
-            {/* Subtitle with typing effect style */}
-            <p className={`text-base sm:text-lg md:text-xl mb-6 sm:mb-8 animate-fade-in-delay max-w-2xl ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'
-              } lg:mx-0 mx-auto`}>
+            <p
+              className={`mx-auto mb-6 max-w-2xl text-base animate-fade-in-delay sm:mb-8 sm:text-lg md:text-xl ${
+                theme === 'light' ? 'text-gray-600' : 'text-gray-400'
+              } lg:mx-0`}
+            >
               Crafting beautiful digital experiences as a{' '}
-              <span className={`font-semibold ${theme === 'light' ? 'text-gray-900' : 'text-white'
-                }`}>
+              <span className={`font-semibold ${theme === 'light' ? 'text-gray-900' : 'text-white'}`}>
                 Full Stack Developer
               </span>
             </p>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start items-center animate-fade-in-up">
+            <div className="flex flex-col items-center gap-4 animate-fade-in-up sm:flex-row sm:justify-center lg:justify-start">
               <button
                 onClick={() => scrollToSection('projects')}
-                className={`group relative px-8 py-4 rounded-full font-medium transition-all duration-300 hover:scale-105 active:scale-95 overflow-hidden ${theme === 'light'
-                  ? 'bg-gray-900 text-white hover:bg-gray-800'
-                  : 'bg-white text-gray-900 hover:bg-gray-100'
-                  }`}
+                className={`group relative overflow-hidden rounded-full px-8 py-4 font-medium transition-all duration-300 hover:scale-105 active:scale-95 ${
+                  theme === 'light' ? 'bg-gray-900 text-white hover:bg-gray-800' : 'bg-white text-gray-900 hover:bg-gray-100'
+                }`}
                 aria-label="View my work"
               >
                 <span className="relative z-10 flex items-center gap-2">
                   View My Work
-                  <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg
+                    className="h-5 w-5 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </span>
-                <div className={`absolute inset-0 -z-10 bg-gradient-to-r opacity-0 group-hover:opacity-100 transition-opacity ${theme === 'light'
-                  ? 'from-blue-600 to-purple-600'
-                  : 'from-blue-400 to-purple-400'
-                  }`}></div>
+                <div
+                  className={`absolute inset-0 -z-10 bg-gradient-to-r opacity-0 transition-opacity group-hover:opacity-100 ${
+                    theme === 'light' ? 'from-blue-600 to-purple-600' : 'from-blue-400 to-purple-400'
+                  }`}
+                ></div>
               </button>
 
               <button
                 onClick={() => scrollToSection('contact')}
-                className={`px-8 py-4 rounded-full font-medium transition-all duration-300 hover:scale-105 active:scale-95 border backdrop-blur-sm ${theme === 'light'
-                  ? 'border-gray-300 text-gray-900 hover:bg-gray-100'
-                  : 'border-gray-600 text-white hover:bg-gray-800'
-                  }`}
+                className={`rounded-full border px-8 py-4 font-medium backdrop-blur-sm transition-all duration-300 hover:scale-105 active:scale-95 ${
+                  theme === 'light'
+                    ? 'border-gray-300 text-gray-900 hover:bg-gray-100'
+                    : 'border-gray-600 text-white hover:bg-gray-800'
+                }`}
                 aria-label="Get in touch"
               >
                 <span className="flex items-center gap-2">
                   Get in Touch
-                  <Mail className="w-5 h-5" />
+                  <Mail className="h-5 w-5" />
                 </span>
               </button>
             </div>
 
-            {/* Social Links */}
-            <div className="flex gap-6 justify-center lg:justify-start mt-12 animate-fade-in-up-delay">
+            <div className="mt-12 flex justify-center gap-6 animate-fade-in-up-delay lg:justify-start">
               <a
                 href="https://github.com/nirjaley"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-1 border ${theme === 'light'
-                  ? 'border-gray-300 text-gray-700 hover:bg-gray-100'
-                  : 'border-gray-700 text-gray-300 hover:bg-gray-800'
-                  }`}
+                className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-300 hover:-translate-y-1 hover:scale-110 ${
+                  theme === 'light'
+                    ? 'border-gray-300 text-gray-700 hover:bg-gray-100'
+                    : 'border-gray-700 text-gray-300 hover:bg-gray-800'
+                }`}
+                aria-label="GitHub"
               >
-                <Github className="w-5 h-5" />
+                <Github className="h-5 w-5" />
               </a>
               <a
                 href="https://www.linkedin.com/in/nirjal-byan/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-1 border ${theme === 'light'
-                  ? 'border-gray-300 text-gray-700 hover:bg-gray-100'
-                  : 'border-gray-700 text-gray-300 hover:bg-gray-800'
-                  }`}
+                className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-300 hover:-translate-y-1 hover:scale-110 ${
+                  theme === 'light'
+                    ? 'border-gray-300 text-gray-700 hover:bg-gray-100'
+                    : 'border-gray-700 text-gray-300 hover:bg-gray-800'
+                }`}
+                aria-label="LinkedIn"
               >
-                <Linkedin className="w-5 h-5" />
+                <Linkedin className="h-5 w-5" />
               </a>
               <a
                 href="https://instagram.com/nirjal.13"
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 hover:-translate-y-1 border ${theme === 'light'
-                  ? 'border-gray-300 text-gray-700 hover:bg-gray-100'
-                  : 'border-gray-700 text-gray-300 hover:bg-gray-800'
-                  }`}
+                className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-300 hover:-translate-y-1 hover:scale-110 ${
+                  theme === 'light'
+                    ? 'border-gray-300 text-gray-700 hover:bg-gray-100'
+                    : 'border-gray-700 text-gray-300 hover:bg-gray-800'
+                }`}
+                aria-label="Instagram"
               >
-                <Instagram className="w-5 h-5" />
+                <Instagram className="h-5 w-5" />
               </a>
-
             </div>
           </div>
 
-          {/* Right Side - Profile Image */}
-          <div className="flex-shrink-0 animate-fade-in-right w-full sm:w-auto flex justify-center">
-            <div className="relative group">
-              {/* Gradient Border Effect */}
-              <div className={`absolute -inset-1 rounded-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-75 group-hover:opacity-100 blur-lg transition-all duration-300 animate-pulse-slow`}></div>
+          <div className="relative z-10 flex w-full flex-shrink-0 justify-center lg:w-auto lg:justify-end">
+            <div className="relative group animate-fade-in-right">
+              <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-blue-300 via-purple-300 to-pink-200 opacity-70 blur-md transition-all duration-300 group-hover:opacity-100"></div>
 
-              {/* Image Container */}
-              <div className="relative w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-96 lg:h-96 rounded-full overflow-hidden border-4 border-white dark:border-gray-900">
+              <div
+                className={`relative h-64 w-64 overflow-hidden rounded-full border-4 shadow-xl sm:h-72 sm:w-72 md:h-80 md:w-80 lg:h-96 lg:w-96 ${
+                  theme === 'light' ? 'border-white' : 'border-gray-900'
+                }`}
+              >
                 <img
                   src="/assets/images/profile.jpg"
                   alt="Nirjal"
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
                   onError={(e) => {
-                    // Fallback gradient if image doesn't load
                     e.currentTarget.style.display = 'none';
                     e.currentTarget.parentElement!.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
                   }}
                 />
               </div>
 
-              {/* Floating Elements */}
-              <div className={`absolute -top-4 -right-4 w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center backdrop-blur-sm border animate-float ${theme === 'light' ? 'bg-white/80 border-gray-200' : 'bg-gray-800/80 border-gray-700'
-                }`}>
+              <div
+                className={`absolute -right-2 top-2 flex h-16 w-16 items-center justify-center rounded-full border backdrop-blur-sm animate-float sm:-right-4 sm:top-0 sm:h-20 sm:w-20 ${
+                  theme === 'light' ? 'border-gray-200 bg-white/85' : 'border-gray-700 bg-gray-800/85'
+                }`}
+              >
                 <span className="text-2xl sm:text-3xl">🎵</span>
               </div>
-              <div className={`absolute -bottom-4 -left-4 w-16 h-16 sm:w-20 sm:h-20 rounded-full flex items-center justify-center backdrop-blur-sm border animate-float-delay ${theme === 'light' ? 'bg-white/80 border-gray-200' : 'bg-gray-800/80 border-gray-700'
-                }`}>
+              <div
+                className={`absolute -bottom-3 left-0 flex h-16 w-16 items-center justify-center rounded-full border backdrop-blur-sm animate-float-delay sm:-bottom-4 sm:left-2 sm:h-20 sm:w-20 ${
+                  theme === 'light' ? 'border-gray-200 bg-white/85' : 'border-gray-700 bg-gray-800/85'
+                }`}
+              >
                 <span className="text-2xl sm:text-3xl">🚀</span>
               </div>
             </div>
@@ -192,31 +214,32 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
         </div>
       </div>
 
-      {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className={`w-6 h-10 rounded-full border-2 flex items-start justify-center p-2 ${theme === 'light' ? 'border-gray-400' : 'border-gray-600'
-          }`}>
-          <div className={`w-1.5 h-1.5 rounded-full animate-scroll ${theme === 'light' ? 'bg-gray-600' : 'bg-gray-400'
-            }`}></div>
+        <div
+          className={`flex h-10 w-6 items-start justify-center rounded-full border-2 p-2 ${
+            theme === 'light' ? 'border-gray-400' : 'border-gray-600'
+          }`}
+        >
+          <div className={`h-1.5 w-1.5 rounded-full animate-scroll ${theme === 'light' ? 'bg-gray-600' : 'bg-gray-400'}`}></div>
         </div>
       </div>
 
       <style>{`
-        @keyframes float-slow {
+        @keyframes orbit-left {
           0%, 100% {
-            transform: translate(0, 0) scale(1);
+            transform: translate3d(0, -50%, 0) scale(1);
           }
           50% {
-            transform: translate(50px, 50px) scale(1.1);
+            transform: translate3d(22px, -62%, 0) scale(1.03);
           }
         }
 
-        @keyframes float-slow-delay {
+        @keyframes orbit-right {
           0%, 100% {
-            transform: translate(0, 0) scale(1);
+            transform: translate3d(0, -50%, 0) scale(1);
           }
           50% {
-            transform: translate(-50px, -50px) scale(1.1);
+            transform: translate3d(-18px, -40%, 0) scale(1.04);
           }
         }
 
@@ -235,17 +258,6 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
           }
           50% {
             transform: translateY(-15px);
-          }
-        }
-
-        @keyframes fade-in-down {
-          from {
-            opacity: 0;
-            transform: translateY(-20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
           }
         }
 
@@ -319,30 +331,12 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
           }
         }
 
-        @keyframes gradient {
-          0%, 100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-        }
-
         @keyframes blink {
           0%, 50%, 100% {
             opacity: 1;
           }
           25%, 75% {
             opacity: 0;
-          }
-        }
-
-        @keyframes pulse-slow {
-          0%, 100% {
-            opacity: 0.1;
-          }
-          50% {
-            opacity: 0.2;
           }
         }
 
@@ -357,14 +351,6 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
           }
         }
 
-        .animate-float-slow {
-          animation: float-slow 20s ease-in-out infinite;
-        }
-
-        .animate-float-slow-delay {
-          animation: float-slow-delay 25s ease-in-out infinite;
-        }
-
         .animate-float {
           animation: float 3s ease-in-out infinite;
         }
@@ -373,8 +359,12 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
           animation: float-delay 3.5s ease-in-out infinite;
         }
 
-        .animate-fade-in-down {
-          animation: fade-in-down 0.8s ease-out;
+        .animate-orbit-left {
+          animation: orbit-left 10s ease-in-out infinite;
+        }
+
+        .animate-orbit-right {
+          animation: orbit-right 12s ease-in-out infinite;
         }
 
         .animate-fade-in {
@@ -403,17 +393,8 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
           transform-origin: 70% 70%;
         }
 
-        .animate-gradient {
-          background-size: 200% 200%;
-          animation: gradient 3s ease infinite;
-        }
-
         .animate-blink {
           animation: blink 1s step-end infinite;
-        }
-
-        .animate-pulse-slow {
-          animation: pulse-slow 4s ease-in-out infinite;
         }
 
         .animate-scroll {

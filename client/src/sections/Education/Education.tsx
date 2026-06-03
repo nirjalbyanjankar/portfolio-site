@@ -47,8 +47,8 @@ const Education: React.FC<EducationProps> = ({ theme }) => {
   };
 
   return (
-    <section id="education" className={`py-24 transition-colors duration-300 ${
-      theme === 'light' ? 'bg-white' : 'bg-gray-900'
+    <section id="education" className={`py-20 md:py-24 transition-colors duration-300 ${
+      theme === 'light' ? 'bg-slate-50' : 'bg-gray-950'
     }`}>
       <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-16">
@@ -69,8 +69,8 @@ const Education: React.FC<EducationProps> = ({ theme }) => {
           }`}></div>
         </div>
 
-        <div className="relative">
-          <div className={`absolute left-4 md:left-1/2 h-full w-0.5 transform -translate-x-1/2 ${
+        <div className="relative min-h-full">
+          <div className={`absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 transform -translate-x-1/2 ${
             theme === 'light' ? 'bg-gray-200' : 'bg-gray-700'
           }`}></div>
           
