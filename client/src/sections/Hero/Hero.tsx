@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Github, Instagram, Linkedin, Mail } from 'lucide-react';
+import { Github, Linkedin, Mail } from 'lucide-react';
 
 const scrollToSection = (id: string) => {
   const element = document.getElementById(id);
@@ -134,7 +134,7 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
 
             <div className="mt-12 flex justify-center gap-6 animate-fade-in-up-delay lg:justify-start">
               <a
-                href="https://github.com/nirjaley"
+                href="https://github.com/nirjalbyanjankar"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-300 hover:-translate-y-1 hover:scale-110 ${
@@ -158,19 +158,6 @@ const Hero: React.FC<HeroProps> = ({ theme }) => {
                 aria-label="LinkedIn"
               >
                 <Linkedin className="h-5 w-5" />
-              </a>
-              <a
-                href="https://instagram.com/nirjal.13"
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`flex h-12 w-12 items-center justify-center rounded-full border transition-all duration-300 hover:-translate-y-1 hover:scale-110 ${
-                  theme === 'light'
-                    ? 'border-gray-300 text-gray-700 hover:bg-gray-100'
-                    : 'border-gray-700 text-gray-300 hover:bg-gray-800'
-                }`}
-                aria-label="Instagram"
-              >
-                <Instagram className="h-5 w-5" />
               </a>
             </div>
           </div>
