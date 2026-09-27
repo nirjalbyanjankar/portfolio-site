@@ -1,24 +1,15 @@
-import React from 'react';
-
-interface FooterProps {
-  theme: 'light' | 'dark';
-}
-
-const Footer: React.FC<FooterProps> = ({ theme = 'light' }) => {
-  const currentYear = new Date().getFullYear();
+export default function Footer({ showThanks = false }: { showThanks?: boolean }) {
+  const now = new Date();
+  const date = now.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
 
   return (
-    <footer className={`py-8 transition-colors duration-300 ${theme === 'light' ? 'bg-white' : 'bg-gray-900'}`}>
-      <div className="max-w-6xl mx-auto px-6">
-        <div className={`border-t pt-5 ${theme === 'light' ? 'border-gray-200' : 'border-gray-800'}`}>
-          <div className={`flex flex-col gap-2 text-sm sm:flex-row sm:items-center sm:justify-between ${theme === 'light' ? 'text-gray-600' : 'text-gray-400'}`}>
-            <p>&copy; {currentYear} Nirjal Byanjankar &middot; Last updated 06/03/2026</p>
-            <p>12:57 PM</p>
-          </div>
-        </div>
-      </div>
+    <footer className="site-footer">
+      <p>&copy;{now.getFullYear()}</p>
+      {showThanks ? <p className="footer-note">Made it this far? Thanks!</p> : <span aria-hidden="true" />}
+      <time dateTime={now.toISOString()}>
+        {date}<span className="footer-dot" aria-hidden="true">&bull;</span>{time}
+      </time>
     </footer>
   );
-};
-
-export default Footer;
+}

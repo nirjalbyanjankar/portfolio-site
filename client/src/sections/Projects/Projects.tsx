@@ -1,189 +1,70 @@
-import React from 'react';
-import { ExternalLink, Github, Code2, HandHeart, Dribbble, Landmark, BookOpen, Calendar } from 'lucide-react';
-
-interface Project {
-  title: string;
-  desc: string;
-  tags: string[];
-  icon: React.ComponentType<{ className?: string }>;
-  github?: string;
-  demo?: string;
-}
+import { ArrowUpRight, Github, ChevronDown, ChevronUp, Coffee, Gem, HandHeart, Dribbble, Landmark, BookOpen } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import { projects } from '../../data/projects';
+const projectIcons: Record<string, LucideIcon> = {
+  'Himalayan Sip': Coffee,
+  'Shangrila Trade Concern': Gem,
+  'Khusimwelfare': HandHeart,
+  'Basketboard': Dribbble,
+  'BondBrokerage': Landmark,
+  'Lord of the Reads': BookOpen,
+};
+const featuredTitles = ['Shangrila Trade Concern', 'Himalayan Sip', 'BondBrokerage'];
+const orderedProjects = [
+  ...featuredTitles.flatMap(title => projects.filter(project => project.title === title)),
+  ...projects.filter(project => !featuredTitles.includes(project.title)),
+];
 
 interface ProjectsProps {
-  theme: 'light' | 'dark';
+  expanded: boolean;
+  onExpandedChange: (expanded: boolean) => void;
 }
 
-const Projects: React.FC<ProjectsProps> = ({ theme = 'light' }) => {
-  const projects: Project[] = [
-    {
-      title: "Himalayan Sip",
-      desc: "Cafe website built to showcase the brand with a clean, inviting interface and a modern browsing experience.",
-      tags: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-      icon: Calendar,
-      github: "https://github.com/nirjalbyanjankar/himalayansip",
-      demo: "https://himalayansip.vercel.app/"
-    },
-    {
-      title: "Shangrila Trade Concern",
-      desc: "Website for a gem trading company, built to present the brand with a polished, responsive, and modern web experience.",
-      tags: ["Next.js", "TypeScript", "Tailwind CSS"],
-      icon: Code2,
-      github: "https://github.com/nirjalbyanjankar/shangrila-trade",
-      demo: "https://shangrilatradeconcern.com.np/"
-    },
-    {
-      title: "Khusimwelfare",
-      desc: "Website design for a welfare organization, created with Figma to showcase modern UI/UX principles and responsive design.",
-      tags: ["Figma", "UI/UX Design", "Web Design", "Prototyping"],
-      icon: HandHeart,
-      github: undefined,
-      demo: "https://www.figma.com/design/ecjsXATM4G01psLtXIB3Dw/KhusimWelfare?node-id=0-1&p=f&t=LCIldZSG0VLKKMhL-0"
-    },
-    {
-      title: "Basketboard",
-      desc: "Full-stack basketball coaching web application with payment integration, real-time chat, and live notifications.",
-      tags: ["React", "Node.js", "Express", "Socket.io", "PostgreSQL", "Khalti API"],
-      icon: Dribbble,
-      github: "https://github.com/nirjaley/basketboard",
-      demo: "https://basketboard-five.vercel.app/"
-    },
-    {
-      title: "BondBrokerage",
-      desc: "Modern website design for a bond brokerage company, created with Figma to showcase financial services and investment opportunities.",
-      tags: ["Figma", "UI/UX Design", "Finance", "Web Design"],
-      icon: Landmark,
-      github: undefined,
-      demo: "https://www.figma.com/design/mNjRnpFh84l4ZBlGLYPRFu/BondBrokerage"
-    },
-    {
-      title: "Lord of the Reads",
-      desc: "A collaborative e-commerce library platform for book lovers, featuring a full-stack solution with user accounts, book listings, and a seamless reading experience.",
-      tags: ["React", "Vite", "JavaScript", "C#", "PostgreSQL", "Tailwind"],
-      icon: BookOpen,
-      github: "https://github.com/Prajesh-Shrestha-Github/LordofTheReads",
+export default function Projects({ expanded, onExpandedChange }: ProjectsProps) {
+  const visibleProjects = expanded ? orderedProjects : orderedProjects.slice(0, 3);
+  const toggleProjects = () => {
+    const willExpand = !expanded;
+    onExpandedChange(willExpand);
+
+    if (willExpand && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      window.setTimeout(() => {
+        window.scrollBy({ top: 150, behavior: 'auto' });
+      }, 180);
     }
-  ];
+  };
 
   return (
-    <section id="projects" className={`py-20 md:py-24 transition-colors duration-300 ${
-      theme === 'light' ? 'bg-white' : 'bg-gray-900'
-    }`}>
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className={`inline-block px-4 py-2 rounded-full text-sm font-medium mb-4 ${
-            theme === 'light' 
-              ? 'bg-blue-100 text-blue-600' 
-              : 'bg-blue-900/30 text-blue-400'
-          }`}>
-            My Work
-          </span>
-          <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${
-            theme === 'light' ? 'text-gray-900' : 'text-white'
-          }`}>
-            Featured Projects
-          </h2>
-          <div className={`w-20 h-1 mx-auto rounded-full ${
-            theme === 'light' ? 'bg-gray-900' : 'bg-white'
-          }`}></div>
-        </div>
-
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {projects.map((project) => {
-            const IconComponent = project.icon;
-            return (
-              <div
-                key={project.title}
-                className={`p-6 rounded-2xl transition-all duration-300 hover:scale-[1.02] ${
-                  theme === 'light'
-                    ? 'bg-white shadow-lg hover:shadow-xl'
-                    : 'bg-gray-800 hover:shadow-2xl'
-                }`}
-              >
-                {/* Icon and Links */}
-                <div className="flex items-start justify-between mb-4">
-                  <div className={`p-3 rounded-xl transition-colors ${
-                    theme === 'light' 
-                      ? 'bg-blue-100 group-hover:bg-blue-200' 
-                      : 'bg-blue-900/30 group-hover:bg-blue-900/50'
-                  }`}>
-                    <IconComponent className={`w-6 h-6 ${
-                      theme === 'light' ? 'text-blue-600' : 'text-blue-400'
-                    }`} />
-                  </div>
-                  
-                  <div className="flex gap-2">
-                    {project.github && (
-                      <a
-                        href={project.github}
-                        className={`p-2 rounded-lg transition-all duration-300 hover:scale-110 ${
-                          theme === 'light'
-                            ? 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-                            : 'bg-gray-700/50 hover:bg-gray-700 text-gray-300'
-                        }`}
-                        aria-label={`View ${project.title} on GitHub`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <Github className="w-4 h-4" />
-                      </a>
-                    )}
-                    {project.demo && (
-                      <a
-                        href={project.demo}
-                        className={`p-2 rounded-lg transition-all duration-300 hover:scale-110 ${
-                          theme === 'light'
-                            ? 'bg-gray-100 hover:bg-gray-200 text-gray-700'
-                            : 'bg-gray-700/50 hover:bg-gray-700 text-gray-300'
-                        }`}
-                        aria-label={`View ${project.title} demo`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                      </a>
-                    )}
-                  </div>
-                </div>
-
-                {/* Title */}
-                <h3 className={`text-xl font-bold mb-3 ${
-                  theme === 'light' ? 'text-gray-900' : 'text-white'
-                }`}>
-                  {project.title}
-                </h3>
-
-                {/* Description */}
-                <p className={`text-sm mb-4 leading-relaxed ${
-                  theme === 'light' ? 'text-gray-600' : 'text-gray-300'
-                }`}>
-                  {project.desc}
-                </p>
-
-                {/* Tags */}
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 hover:scale-105 cursor-default ${
-                        theme === 'light'
-                          ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                          : 'bg-gray-700/50 text-gray-300 hover:bg-gray-700'
-                      }`}
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+    <section id="projects" className="work-section">
+      <div className="section-heading"><h2>Projects</h2><span className="eyebrow">DESIGN & DEVELOPMENT / 01-{String(visibleProjects.length).padStart(2, '0')}</span></div>
+      <div className="project-grid" id="project-list">{orderedProjects.map((project, index) => {
+        const Icon = projectIcons[project.title];
+        const visible = index < 3 || expanded;
+        return (
+          <div
+            className="project-reveal"
+            key={project.title}
+            data-visible={visible}
+            aria-hidden={!visible}
+            inert={!visible}
+          >
+          <article className="project">
+            <div className="project-title-row"><h3><a href={project.demo || project.github} target="_blank" rel="noreferrer">{project.title} <ArrowUpRight size={15} /><Icon size={18} strokeWidth={1.5} aria-hidden="true" /></a></h3>{project.github && <a className="source-link" href={project.github} target="_blank" rel="noreferrer" aria-label={project.title + ' source on GitHub'}><Github size={16} /></a>}</div>
+            <p className="project-description">{project.desc}</p>
+            <ul className="project-tags" aria-label="Technologies">{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+          </article>
+          </div>
+        );
+      })}</div>
+      <button
+        className="projects-more"
+        type="button"
+        aria-expanded={expanded}
+        aria-controls="project-list"
+        onClick={toggleProjects}
+      >
+        {expanded ? 'Less' : 'More'}
+        {expanded ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
+      </button>
     </section>
   );
-};
-
-export default Projects;
+}

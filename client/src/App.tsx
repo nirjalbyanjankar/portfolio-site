@@ -1,87 +1,115 @@
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Navbar from "./components/NavBar";
-import ScrollSection from "./components/ScrollSection";
-import ScrollToTop from "./components/ScrollToTop";
-import Hero from "./sections/Hero/Hero";
-import About from "./sections/About/About";
-import Skills from "./sections/Skills/Skills";
-import Projects from "./sections/Projects/Projects";
-import Contact from "./sections/Contact/Contact";
-import Experience from "./sections/Experience/Experience";
-import Footer from "./components/Footer";
+import { useEffect, useLayoutEffect, useState } from 'react';
+import type { MouseEvent as ReactMouseEvent } from 'react';
+import { flushSync } from 'react-dom';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import Navbar from './components/NavBar';
+import Hero from './sections/Hero/Hero';
+import Projects from './sections/Projects/Projects';
+import Footer from './components/Footer';
+import AboutPage from './pages/AboutPage';
 
-function App() {
-  const [scrolled, setScrolled] = useState(false);
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-  useEffect(() => {
-    if ('scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
-    }
+export default function App() {
+  const [isAboutPage, setIsAboutPage] = useState(() => window.location.hash === '#/about');
+  const [projectsExpanded, setProjectsExpanded] = useState(false);
+  useLayoutEffect(() => {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    const smoother = ScrollSmoother.create({
+      wrapper: '#smooth-wrapper',
+      content: '#smooth-content',
+      smooth: 0.75,
+      smoothTouch: 0,
+      effects: false,
+    });
+
+    return () => smoother.kill();
   }, []);
-
   useEffect(() => {
-    const handleScroll = () => {
-      const isScrolled = window.scrollY > 10;
-      if (isScrolled !== scrolled) {
-        setScrolled(isScrolled);
+    const handleNavigation = () => {
+      const hash = window.location.hash;
+      setIsAboutPage(hash === '#/about');
+      if (hash === '#/about' || hash === '#/') {
+        const smoother = ScrollSmoother.get();
+        if (smoother) smoother.scrollTo(0, false);
+        else window.scrollTo({ top: 0, behavior: 'instant' });
       }
     };
+    window.addEventListener('hashchange', handleNavigation);
+    return () => window.removeEventListener('hashchange', handleNavigation);
+  }, []);
+  useEffect(() => {
+    document.title = isAboutPage ? 'About — Nirjal Byanjankar' : 'Nirjal Byanjankar — Developer & Designer';
+  }, [isAboutPage]);
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    try { return localStorage.getItem('portfolio-theme') === 'dark' ? 'dark' : 'light'; }
+    catch { return 'light'; }
+  });
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme;
+    try { localStorage.setItem('portfolio-theme', theme); } catch { /* Storage is optional. */ }
+  }, [theme]);
+  useEffect(() => {
+    const lockHome = !isAboutPage && !projectsExpanded;
+    document.body.classList.toggle('home-page', !isAboutPage);
+    document.body.classList.toggle('home-projects-collapsed', lockHome);
+    return () => {
+      document.body.classList.remove('home-page');
+      document.body.classList.remove('home-projects-collapsed');
+    };
+  }, [isAboutPage, projectsExpanded]);
+  useEffect(() => {
+    const refresh = window.setTimeout(() => ScrollTrigger.refresh(), 650);
+    return () => window.clearTimeout(refresh);
+  }, [isAboutPage, projectsExpanded]);
+  const handleThemeToggle = (event: ReactMouseEvent<HTMLButtonElement>) => {
+    const nextTheme = theme === 'light' ? 'dark' : 'light';
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const transitionDocument = document as Document & {
+      startViewTransition?: (callback: () => void) => { ready: Promise<void> };
+    };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [scrolled]);
+    if (!transitionDocument.startViewTransition || reduceMotion) {
+      setTheme(nextTheme);
+      return;
+    }
 
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'light' ? 'dark' : 'light');
+    const { clientX: x, clientY: y } = event;
+    const radius = Math.hypot(
+      Math.max(x, window.innerWidth - x),
+      Math.max(y, window.innerHeight - y),
+    );
+
+    const transition = transitionDocument.startViewTransition(() => {
+      flushSync(() => setTheme(nextTheme));
+    });
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+        {
+          duration: 650,
+          easing: 'cubic-bezier(.16, 1, .3, 1)',
+          pseudoElement: '::view-transition-new(root)',
+        },
+      );
+    }).catch(() => undefined);
   };
-
   return (
-    <AnimatePresence mode="wait">
-      <motion.div 
-        key={theme}
-        initial={{ opacity: 0.9, scale: 0.998 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0.9, scale: 0.998 }}
-        transition={{ duration: 0.2, ease: [0.4, 0, 0.2, 1] }}
-        className={`w-full min-h-screen ${theme === 'light' ? 'bg-white text-gray-900' : 'bg-gray-900 text-white'} transition-colors duration-300 ease-in-out`}
-      >
-        <Navbar theme={theme} toggleTheme={toggleTheme} />
-        
-        <div className="w-full transition-colors duration-300 ease-in-out">
-          <ScrollSection id="home">
-            <Hero theme={theme} />
-          </ScrollSection>
-          
-          <ScrollSection id="about">
-            <About theme={theme} />
-          </ScrollSection>
-
-          <ScrollSection id="experience">
-            <Experience theme={theme} />
-          </ScrollSection>
-          
-          <ScrollSection id="skills">
-            <Skills theme={theme} />
-          </ScrollSection>
-          
-          <ScrollSection id="projects">
-            <Projects theme={theme} />
-          </ScrollSection>
-          
-          <ScrollSection id="contact">
-            <Contact theme={theme} />
-          </ScrollSection>
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <div className="portfolio">
+          <a className="skip-link" href="#main">Skip to content</a>
+          <Navbar theme={theme} toggleTheme={handleThemeToggle} isAboutPage={isAboutPage} />
+          <main key={isAboutPage ? 'about' : 'home'} id="main" className={`${isAboutPage ? 'about-main' : 'home-main'} page-enter`}>
+            {isAboutPage ? <AboutPage /> : <><Hero /><Projects expanded={projectsExpanded} onExpandedChange={setProjectsExpanded} /></>}
+          </main>
+          <Footer showThanks={isAboutPage} />
         </div>
-        
-        <Footer theme={theme} />
-        <ScrollToTop />
-      </motion.div>
-    </AnimatePresence>
+      </div>
+    </div>
   );
 }
-
-export default App;
