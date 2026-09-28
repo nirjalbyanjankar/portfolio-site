@@ -1,4 +1,4 @@
-import { Film, Gamepad2, Music2 } from 'lucide-react';
+import { ExternalLink, Film, Gamepad2, Music2 } from 'lucide-react';
 import Experience from '../sections/Experience/Experience';
 import Skills from '../sections/Skills/Skills';
 import Contact from '../sections/Contact/Contact';
@@ -33,10 +33,34 @@ export default function AboutPage() {
       <section className="about-life" aria-labelledby="outside-work-title">
         <h2 id="outside-work-title">Beyond the code</h2>
         <div className="about-life-list">
-          <p><Music2 size={16} /><span>I love progressive rock and jazz — odd time signatures welcome</span></p>
+          <p><Music2 size={16} /><span>I love progressive rock and blues — odd time signatures welcome</span></p>
           <p><Gamepad2 size={16} /><span>Chasing sunsets across the Wild West in Red Dead Redemption 2</span></p>
-          <p><Film size={16} /><span>I like films such as <em>The Truman Show</em> — a smooth reminder that there's life beyond the daily script. And when it's time to log off: “In case I don't see ya, good afternoon, good evening, and good night!”</span></p>
+          <p><Film size={16} /><span>I like films such as <em>Into the Wild</em> — a reminder to wander, connect, and remember that “Happiness is only real when shared.”</span></p>
         </div>
+      </section>
+
+      <section className="now-playing" aria-labelledby="now-playing-title">
+        <h2 id="now-playing-title">Now playing</h2>
+        <a
+          className="now-playing-card"
+          href="https://open.spotify.com/track/1jhH7vvy8hoHuc0mGuZsLX"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Listen to Little Miss Strange by Jimi Hendrix on Spotify"
+        >
+          <img
+            className="now-playing-cover"
+            src={import.meta.env.BASE_URL + 'assets/images/electric-ladyland.jpg'}
+            alt="Electric Ladyland album cover"
+            width="72"
+            height="72"
+          />
+          <span className="now-playing-copy">
+            <strong>Little Miss Strange</strong>
+            <span>Jimi Hendrix · Electric Ladyland</span>
+          </span>
+          <span className="now-playing-link">Spotify <ExternalLink size={11} /></span>
+        </a>
       </section>
 
       <Contact />

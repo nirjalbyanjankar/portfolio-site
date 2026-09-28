@@ -9,7 +9,7 @@ export default function Navbar({ theme, toggleTheme, isAboutPage = false }: Navb
         : <span className="header-mark" aria-hidden="true">//</span>}
       <nav aria-label="Main navigation"><a href="#/about">About</a></nav>
       <div className="header-actions">
-        <a className="resume-link" href={import.meta.env.BASE_URL + 'Nirjal%20Byanjankar.pdf'} download="Nirjal_Byanjankar_Resume.pdf">Resume <ArrowDownToLine size={14} /></a>
+        <a className="resume-link" href={import.meta.env.BASE_URL + '01-Nirjal%20Byanjankar.pdf'} download="01-Nirjal Byanjankar.pdf">Resume <ArrowDownToLine size={14} /></a>
         <button className="icon-button" onClick={toggleTheme} aria-label={'Switch to ' + (theme === 'light' ? 'dark' : 'light') + ' mode'}>{theme === 'light' ? <Moon size={17} /> : <Sun size={17} />}</button>
       </div>
     </header>

@@ -107,7 +107,7 @@ export default function App() {
           <main key={isAboutPage ? 'about' : 'home'} id="main" className={`${isAboutPage ? 'about-main' : 'home-main'} page-enter`}>
             {isAboutPage ? <AboutPage /> : <><Hero /><Projects expanded={projectsExpanded} onExpandedChange={setProjectsExpanded} /></>}
           </main>
-          <Footer showThanks={isAboutPage} />
+          <Footer />
         </div>
       </div>
     </div>
