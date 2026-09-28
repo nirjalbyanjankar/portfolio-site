@@ -20,8 +20,8 @@ export default function AboutPage() {
               <path d="M69 7C54 5 42 8 31 16C25 20 19 22 8 22" />
               <path d="M14 16L7 22L15 26" />
             </svg>
-            <span>22 year old</span>
-          </div>
+            <span>22 years old</span>
+          </div> 
         </div>
 
         <div className="about-copy">
