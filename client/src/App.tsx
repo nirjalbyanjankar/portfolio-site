@@ -42,7 +42,7 @@ export default function App() {
     return () => window.removeEventListener('hashchange', handleNavigation);
   }, []);
   useEffect(() => {
-    document.title = isAboutPage ? 'About — Nirjal Byanjankar' : 'Nirjal Byanjankar — Developer & Designer';
+    document.title = isAboutPage ? 'About — Nirjal Byanjankar' : 'Nirjal Byanjankar';
   }, [isAboutPage]);
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
     try { return localStorage.getItem('portfolio-theme') === 'dark' ? 'dark' : 'light'; }
