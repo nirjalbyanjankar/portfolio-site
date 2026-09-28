@@ -6,7 +6,7 @@ export default function Navbar({ theme, toggleTheme, isAboutPage = false }: Navb
     <header className="site-header">
       {isAboutPage
         ? <a className="header-back" href="#/" aria-label="Back to home"><ArrowLeft size={15} /></a>
-        : <span className="header-mark" aria-hidden="true">//</span>}
+        : <img className="header-mark" src={import.meta.env.BASE_URL + 'assets/images/mountain-mark.png'} alt="" aria-hidden="true" />}
       <nav aria-label="Main navigation"><a href="#/about">About</a></nav>
       <div className="header-actions">
         <a className="resume-link" href={import.meta.env.BASE_URL + '01-Nirjal%20Byanjankar.pdf'} download="01-Nirjal Byanjankar.pdf">Resume <ArrowDownToLine size={14} /></a>

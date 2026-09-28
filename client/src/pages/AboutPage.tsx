@@ -7,13 +7,22 @@ export default function AboutPage() {
   return (
     <>
       <section className="about-profile">
-        <img
-          className="about-portrait"
-          src={import.meta.env.BASE_URL + 'assets/images/profile.png'}
-          alt="Nirjal Byanjankar"
-          width="120"
-          height="120"
-        />
+        <div className="about-portrait-row">
+          <img
+            className="about-portrait"
+            src={import.meta.env.BASE_URL + 'assets/images/profile.png'}
+            alt="Nirjal Byanjankar"
+            width="120"
+            height="120"
+          />
+          <div className="portrait-note" aria-label="22 year old">
+            <svg viewBox="0 0 72 30" aria-hidden="true">
+              <path d="M69 7C54 5 42 8 31 16C25 20 19 22 8 22" />
+              <path d="M14 16L7 22L15 26" />
+            </svg>
+            <span>22 year old</span>
+          </div>
+        </div>
 
         <div className="about-copy">
           <p>
