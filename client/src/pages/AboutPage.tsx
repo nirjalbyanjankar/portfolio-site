@@ -1,6 +1,8 @@
 import { ExternalLink, Film, Gamepad2, Music2 } from 'lucide-react';
 import Experience from '../sections/Experience/Experience';
 import Skills from '../sections/Skills/Skills';
+import Certifications from '../sections/Certifications/Certifications';
+import GitHubContributions from '../sections/GitHubContributions/GitHubContributions';
 import Contact from '../sections/Contact/Contact';
 
 export default function AboutPage() {
@@ -38,9 +40,22 @@ export default function AboutPage() {
 
       <Experience />
       <Skills />
+      <Certifications />
+
+      <section className="now-section" aria-labelledby="now-title">
+        <h2 id="now-title">Now</h2>
+        <p>Currently learning DevOps and exploring how reliable systems are built, deployed, and scaled.</p>
+        <ul>
+          <li>Learning Docker, deployment workflows, and cloud fundamentals</li>
+          <li>Currently working on a project built around a complete Docker environment</li>
+          <li>Improving a little every day through consistent hands-on work</li>
+        </ul>
+      </section>
+
+      <GitHubContributions />
 
       <section className="about-life" aria-labelledby="outside-work-title">
-        <h2 id="outside-work-title">Beyond the code</h2>
+        <h2 id="outside-work-title">Beyond the work</h2>
         <div className="about-life-list">
           <p><Music2 size={16} /><span>I love progressive rock and blues — odd time signatures welcome</span></p>
           <p><Gamepad2 size={16} /><span>Chasing sunsets across the Wild West in Red Dead Redemption 2</span></p>

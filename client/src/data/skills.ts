@@ -1,7 +1,7 @@
 export const skillCategories = [
   {
     title: "Frontend & Design",
-    skills: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "Figma"]
+    skills: ["React.js", "Next.js", "TypeScript", "Tailwind CSS", "Figma", "Shopify"]
   },
   {
     title: "Backend & Database",
