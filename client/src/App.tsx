@@ -13,7 +13,11 @@ import AboutPage from './pages/AboutPage';
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 export default function App() {
-  const [isAboutPage, setIsAboutPage] = useState(() => window.location.hash === '#/about');
+  const [isAboutPage, setIsAboutPage] = useState(() => {
+    if (window.location.hash === '#/about') window.history.replaceState({}, '', '/about');
+    else if (window.location.hash === '#/') window.history.replaceState({}, '', '/');
+    return window.location.pathname.replace(/\/$/, '') === '/about';
+  });
   const [projectsExpanded, setProjectsExpanded] = useState(false);
   useLayoutEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -30,16 +34,13 @@ export default function App() {
   }, []);
   useEffect(() => {
     const handleNavigation = () => {
-      const hash = window.location.hash;
-      setIsAboutPage(hash === '#/about');
-      if (hash === '#/about' || hash === '#/') {
-        const smoother = ScrollSmoother.get();
-        if (smoother) smoother.scrollTo(0, false);
-        else window.scrollTo({ top: 0, behavior: 'instant' });
-      }
+      setIsAboutPage(window.location.pathname.replace(/\/$/, '') === '/about');
+      const smoother = ScrollSmoother.get();
+      if (smoother) smoother.scrollTo(0, false);
+      else window.scrollTo({ top: 0, behavior: 'instant' });
     };
-    window.addEventListener('hashchange', handleNavigation);
-    return () => window.removeEventListener('hashchange', handleNavigation);
+    window.addEventListener('popstate', handleNavigation);
+    return () => window.removeEventListener('popstate', handleNavigation);
   }, []);
   useEffect(() => {
     document.title = isAboutPage ? 'About — Nirjal Byanjankar' : 'Nirjal Byanjankar';
@@ -98,12 +99,20 @@ export default function App() {
       );
     }).catch(() => undefined);
   };
+  const navigate = (path: '/' | '/about') => {
+    if (window.location.pathname === path) return;
+    window.history.pushState({}, '', path);
+    setIsAboutPage(path === '/about');
+    const smoother = ScrollSmoother.get();
+    if (smoother) smoother.scrollTo(0, false);
+    else window.scrollTo({ top: 0, behavior: 'instant' });
+  };
   return (
     <div id="smooth-wrapper">
       <div id="smooth-content">
         <div className="portfolio">
           <a className="skip-link" href="#main">Skip to content</a>
-          <Navbar theme={theme} toggleTheme={handleThemeToggle} isAboutPage={isAboutPage} />
+          <Navbar theme={theme} toggleTheme={handleThemeToggle} isAboutPage={isAboutPage} onNavigate={navigate} />
           <main key={isAboutPage ? 'about' : 'home'} id="main" className={`${isAboutPage ? 'about-main' : 'home-main'} page-enter`}>
             {isAboutPage ? <AboutPage /> : <><Hero /><Projects expanded={projectsExpanded} onExpandedChange={setProjectsExpanded} /></>}
           </main>

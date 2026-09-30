@@ -8,6 +8,13 @@
     <title>Nirjal Byanjankar</title>
   </head>
   <body>
+    <script>
+      const redirectedPath = sessionStorage.getItem('spa-redirect');
+      if (redirectedPath) {
+        sessionStorage.removeItem('spa-redirect');
+        history.replaceState({}, '', redirectedPath);
+      }
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
