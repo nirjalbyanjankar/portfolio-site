@@ -9,7 +9,7 @@ export default function Navbar({ theme, toggleTheme, isAboutPage = false, onNavi
         : <img className="header-mark" src={import.meta.env.BASE_URL + 'assets/images/mountain-mark.png'} alt="" aria-hidden="true" />}
       <nav aria-label="Main navigation"><a href="/about" onClick={event => { event.preventDefault(); onNavigate('/about'); }}>About</a></nav>
       <div className="header-actions">
-        <a className="resume-link" href={import.meta.env.BASE_URL + '01-Nirjal%20Byanjankar.pdf?v=20261006'} download="01-Nirjal Byanjankar.pdf">Resume <ArrowDownToLine size={14} /></a>
+        <a className="resume-link" href={import.meta.env.BASE_URL + '01-Nirjal%20Byanjankar.pdf?v=20261006-2'} download="01-Nirjal Byanjankar.pdf">Resume <ArrowDownToLine size={14} /></a>
         <button className="icon-button" onClick={toggleTheme} aria-label={'Switch to ' + (theme === 'light' ? 'dark' : 'light') + ' mode'}>{theme === 'light' ? <Moon size={17} /> : <Sun size={17} />}</button>
       </div>
     </header>
