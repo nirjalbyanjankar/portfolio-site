@@ -2,10 +2,13 @@ import { useState } from 'react';
 import { ArrowRight, Loader2 } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
+const contactEmail = 'nirjalbyanjankar@gmail.com';
+
 export default function Contact() {
   const [form, setForm] = useState({ name: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ success: boolean; message: string } | null>(null);
+  const emailFallback = `mailto:${contactEmail}?subject=${encodeURIComponent(`Portfolio inquiry from ${form.name.trim()}`)}&body=${encodeURIComponent(`${form.message.trim()}\n\nFrom: ${form.name.trim()}`)}`;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -13,6 +16,7 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting) return;
     
     // Basic validation
     if (!form.name.trim() || !form.message.trim()) {
@@ -25,9 +29,10 @@ export default function Contact() {
 
     try {
       setIsSubmitting(true);
+      setSubmitStatus(null);
       
       // Existing EmailJS integration.
-      const serviceId = 'service_0y77imf';
+      const serviceId = 'service_5cu7zbe';
       const templateId = 'template_dr8thpf';
       const publicKey = 'T6Mk0DnbvhnTpmahv';
       
@@ -36,7 +41,7 @@ export default function Contact() {
         templateId,
         {
           name: form.name.trim(),
-          email: 'nirjalbyanjankar@gmail.com',
+          email: contactEmail,
           message: form.message.trim(),
         },
         { publicKey },
@@ -51,13 +56,10 @@ export default function Contact() {
       setForm({ name: "", message: "" });
       
     } catch (error) {
-      const responseError = error as { status?: number; text?: string; message?: string };
-      const details = responseError.text || responseError.message || 'Unknown EmailJS error';
-      const status = responseError.status ? ` (${responseError.status})` : '';
       console.error('Error sending email:', error);
       setSubmitStatus({
         success: false,
-        message: `Could not send${status}: ${details}`
+        message: 'Your message could not be sent. Please try again or send it using your email app.'
       });
     } finally {
       setIsSubmitting(false);
@@ -71,7 +73,7 @@ export default function Contact() {
         <div className="contact-field"><label className="sr-only" htmlFor="name">Name</label><input id="name" name="name" autoComplete="name" required placeholder="Your name" value={form.name} onChange={handleChange} /></div>
         <div className="contact-field contact-message"><label className="sr-only" htmlFor="message">Message</label><textarea id="message" name="message" rows={3} required placeholder="Tell me what's on your mind" value={form.message} onChange={handleChange} /></div>
         <button className="send-button" type="submit" disabled={isSubmitting} aria-label={isSubmitting ? 'Sending message' : 'Send message'}>{isSubmitting ? <Loader2 size={16} className="spinner" /> : <ArrowRight size={16} />}</button>
-        {submitStatus && <p className={submitStatus.success ? 'form-status success' : 'form-status error'} role="status">{submitStatus.message}</p>}
+        {submitStatus && <p className={submitStatus.success ? 'form-status success' : 'form-status error'} role="status">{submitStatus.message}{!submitStatus.success && <> <a href={emailFallback}>Email me directly</a> at {contactEmail}.</>}</p>}
       </form>
     </section>
   );
