@@ -1,16 +1,39 @@
-https://www.nirjalbyanjankar.com.np/
+# Nirjal Byanjankar — Portfolio
 
-## Contact form maintenance
+A personal portfolio website showcasing my projects, skills, experience, certifications, and GitHub contributions, with an about page and a contact form.
 
-The contact form sends through the Brevo-backed EmailJS service `service_5cu7zbe` and template `template_dr8thpf`.
+[Visit the website](https://www.nirjalbyanjankar.com.np/)
 
-Brevo SMTP credentials are stored in EmailJS, never in the frontend. Gmail remains the recipient and is no longer used to authenticate sending.
+## Built with
 
-1. In EmailJS template `template_dr8thpf`, use an authenticated Brevo sender as the From Email and `nirjalbyanjankar@gmail.com` as the To Email.
-2. For SMTP authentication errors, open `service_5cu7zbe` in [EmailJS Email Services](https://dashboard.emailjs.com/admin) and check the SMTP login and key against Brevo's SMTP settings.
-3. Send a test from the EmailJS dashboard and verify receipt, then test the website form.
-4. Send a successful test monthly if the form has little traffic. Brevo can deactivate SMTP keys after 90 days without a successful send, even with no expiration selected. See [Brevo SMTP key maintenance](https://help.brevo.com/hc/en-us/articles/7959631848850-Create-and-manage-your-SMTP-keys).
+- **React and TypeScript** for the interface and application logic.
+- **Vite** for local development and production builds.
+- **CSS** for styling and responsive layouts.
+- **GSAP** for animations.
+- **Lucide React** for icons.
+- **Formspree** for contact form submissions.
+- **ESLint** for code linting.
 
-Failed submissions keep the entered message and offer a direct-email link that opens the visitor's email app with the name and message filled in. The visitor still needs to send that email.
+## Run locally
 
-EmailJS documentation: [Connecting email services](https://www.emailjs.com/docs/user-guide/connecting-email-services/).
+```sh
+cd client
+npm install
+npm run dev
+```
+
+Run `npm run build` from `client` to create a production build, then `npm run preview` to preview it locally.
+
+## Contact form setup
+
+The contact form submits the visitor's name and message to Formspree using an AJAX POST. The recipient is configured in Formspree rather than supplied by the browser.
+
+The configured endpoint is `https://formspree.io/f/mljgzvve`. It is included in the source so local and hosted builds work without additional environment configuration.
+
+1. In [Formspree](https://formspree.io/), verify `nirjalbyanjankar@gmail.com` as the form's notification recipient.
+2. To use a different form, optionally copy `client/.env.example` to `client/.env.local` and change `VITE_FORMSPREE_ENDPOINT`. For hosted builds, set the override in the build environment. Rebuild and redeploy after changing it.
+3. Submit a message from the website and verify that it appears in Formspree and reaches the recipient.
+
+Successful submissions clear the form and show a confirmation. Failed submissions keep the entered message and offer a direct-email link that opens the visitor's email app with the name and message filled in. The visitor still needs to send that email.
+
+See [Formspree's AJAX documentation](https://help.formspree.io/articles/building-your-form/submit-forms-with-javascript-ajax).

@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { ArrowRight, Loader2 } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 
 const contactEmail = 'nirjalbyanjankar@gmail.com';
+const formspreeEndpoint = import.meta.env.VITE_FORMSPREE_ENDPOINT?.trim() || 'https://formspree.io/f/mljgzvve';
 
 export default function Contact() {
   const [form, setForm] = useState({ name: "", message: "" });
@@ -31,21 +31,21 @@ export default function Contact() {
       setIsSubmitting(true);
       setSubmitStatus(null);
       
-      // Existing EmailJS integration.
-      const serviceId = 'service_5cu7zbe';
-      const templateId = 'template_dr8thpf';
-      const publicKey = 'T6Mk0DnbvhnTpmahv';
-      
-      await emailjs.send(
-        serviceId,
-        templateId,
-        {
-          name: form.name.trim(),
-          email: contactEmail,
-          message: form.message.trim(),
+      const response = await fetch(formspreeEndpoint, {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
-        { publicKey },
-      );
+        body: JSON.stringify({
+          name: form.name.trim(),
+          message: form.message.trim(),
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Formspree submission failed (${response.status})`);
+      }
       
       setSubmitStatus({
         success: true,
