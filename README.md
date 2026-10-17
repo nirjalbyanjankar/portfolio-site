@@ -8,11 +8,13 @@ A personal portfolio website showcasing my projects, skills, experience, certifi
 
 - **React and TypeScript** for the interface and application logic.
 - **Vite** for local development and production builds.
-- **CSS** for styling and responsive layouts.
+- **Tailwind CSS** with the Vite plugin for styling and responsive layouts.
 - **GSAP** for animations.
 - **Lucide React** for icons.
 - **Formspree** for contact form submissions.
 - **ESLint** for code linting.
+
+Component styling uses Tailwind utilities. `client/src/index.css` defines the shared theme colors, element states, responsive overrides, and custom animation keyframes. Tailwind's Preflight reset is omitted to preserve the existing browser defaults and appearance.
 
 ## Run locally
 

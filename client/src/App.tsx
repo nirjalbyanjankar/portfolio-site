@@ -110,10 +110,10 @@ export default function App() {
   return (
     <div id="smooth-wrapper">
       <div id="smooth-content">
-        <div className="portfolio">
-          <a className="skip-link" href="#main">Skip to content</a>
+        <div className="portfolio w-[min(520px,_calc(100%_-_40px))] min-h-[100dvh] [margin:0_auto] pt-[28px] flex flex-col">
+          <a className="skip-link fixed top-[-80px] left-[20px] bg-ink text-paper [padding:12px_20px] z-[100]" href="#main">Skip to content</a>
           <Navbar theme={theme} toggleTheme={handleThemeToggle} isAboutPage={isAboutPage} onNavigate={navigate} />
-          <main key={isAboutPage ? 'about' : 'home'} id="main" className={`${isAboutPage ? 'about-main' : 'home-main'} page-enter`}>
+          <main key={isAboutPage ? 'about' : 'home'} id="main" className={`${isAboutPage ? 'about-main' : 'home-main'} page-enter [transform-origin:top_center] [animation:page-enter_.58s_cubic-bezier(.16,_1,_.3,_1)_both]`}>
             {isAboutPage ? <AboutPage /> : <><Hero /><Projects expanded={projectsExpanded} onExpandedChange={setProjectsExpanded} /></>}
           </main>
           <Footer />

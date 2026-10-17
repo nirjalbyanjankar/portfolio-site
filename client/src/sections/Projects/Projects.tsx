@@ -34,29 +34,29 @@ export default function Projects({ expanded, onExpandedChange }: ProjectsProps) 
   };
 
   return (
-    <section id="projects" className="work-section">
-      <div className="section-heading"><h2>Projects</h2><span className="eyebrow">DESIGN & DEVELOPMENT / 01-{String(visibleProjects.length).padStart(2, '0')}</span></div>
-      <div className="project-grid" id="project-list">{orderedProjects.map((project, index) => {
+    <section id="projects" className="work-section pb-[38px]">
+      <div className="section-heading flex items-baseline justify-between gap-[16px] [border-top:1px_solid_var(--line)] [padding:25px_0_28px]"><h2>Projects</h2><span className="eyebrow text-[12px] tracking-[.06em] font-medium text-ink">DESIGN & DEVELOPMENT / 01-{String(visibleProjects.length).padStart(2, '0')}</span></div>
+      <div className="project-grid grid grid-cols-[minmax(0,_1fr)]" id="project-list">{orderedProjects.map((project, index) => {
         const Icon = projectIcons[project.title];
         const visible = index < 3 || expanded;
         return (
           <div
-            className="project-reveal"
+            className="project-reveal grid grid-rows-[0fr] opacity-[0] invisible mt-[0] [transition:grid-template-rows_.35s_ease,_opacity_.25s_ease,_margin-top_.35s_ease,_visibility_0s_.35s]"
             key={project.title}
             data-visible={visible}
             aria-hidden={!visible}
             inert={!visible}
           >
           <article className="project">
-            <div className="project-title-row"><h3><a href={project.demo || project.github} target="_blank" rel="noreferrer">{project.title} <ArrowUpRight size={15} /><Icon size={18} strokeWidth={1.5} aria-hidden="true" /></a></h3>{project.github && <a className="source-link" href={project.github} target="_blank" rel="noreferrer" aria-label={project.title + ' source on GitHub'}><Github size={16} /></a>}</div>
-            <p className="project-description">{project.desc}</p>
-            <ul className="project-tags" aria-label="Technologies">{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
+            <div className="project-title-row flex items-center justify-between gap-[12px]"><h3><a href={project.demo || project.github} target="_blank" rel="noreferrer">{project.title} <ArrowUpRight size={15} /><Icon size={18} strokeWidth={1.5} aria-hidden="true" /></a></h3>{project.github && <a className="source-link text-muted w-[30px] h-[30px] grid place-items-center" href={project.github} target="_blank" rel="noreferrer" aria-label={project.title + ' source on GitHub'}><Github size={16} /></a>}</div>
+            <p className="project-description text-[14px] leading-[1.65] text-ink mt-[5px]">{project.desc}</p>
+            <ul className="project-tags flex flex-wrap gap-[5px_12px] list-none p-0 [margin:13px_0_0] text-[12px] text-ink" aria-label="Technologies">{project.tags.map(tag => <li key={tag}>{tag}</li>)}</ul>
           </article>
           </div>
         );
       })}</div>
       <button
-        className="projects-more"
+        className="projects-more flex items-center gap-[6px] [margin:24px_auto_0] [padding:5px_12px] [border:1px_solid_var(--line)] rounded-[20px] bg-transparent text-ink text-[14px]"
         type="button"
         aria-expanded={expanded}
         aria-controls="project-list"

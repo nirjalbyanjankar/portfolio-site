@@ -21,8 +21,8 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="hero">
-      <div className="intro-identity">
+    <section id="home" className="hero [padding:34px_0_38px] text-[14px] leading-[1.65]">
+      <div className="intro-identity mb-[14px]">
         <h1>Nirjal Byanjankar</h1>
         <p>Lalitpur, Nepal</p>
       </div>
@@ -31,11 +31,11 @@ export default function Hero() {
         Previously at <a href="#experience">AR Forge Tech</a>, building web applications
         from interface to database.
       </p>
-      <p className="intro-contact">
+      <p className="intro-contact mt-[14px]">
         Reach out to me at{' '}
-        <button className="email-copy" type="button" onClick={copyEmail} aria-label={`Copy email address ${email}`}>
+        <button className="email-copy relative inline p-0 [border:0] [background:none] [font:inherit] cursor-pointer" type="button" onClick={copyEmail} aria-label={`Copy email address ${email}`}>
           {email}
-          <span className="copy-tooltip" data-visible={copyStatus !== 'idle'} aria-hidden="true">
+          <span className="copy-tooltip absolute bottom-[calc(100%_+_8px)] left-[50%] [transform:translate(-50%,_3px)] [padding:4px_8px] rounded-[5px] bg-ink text-paper text-[10px] leading-[1.4] tracking-[.1px] whitespace-nowrap [box-shadow:0_2px_8px_#00000012] opacity-[0] invisible pointer-events-none [transition:opacity_.15s_ease,_transform_.15s_ease,_visibility_.15s]" data-visible={copyStatus !== 'idle'} aria-hidden="true">
             {copyStatus === 'copied' ? 'Copied!' : copyStatus === 'error' ? 'Could not copy' : 'Copy'}
           </span>
         </button>,{' '}

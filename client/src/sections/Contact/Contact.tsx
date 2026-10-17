@@ -67,13 +67,13 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="contact-section">
-      <h2 className="contact-title">Have something in mind?</h2>
-      <form onSubmit={handleSubmit} className="contact-form">
-        <div className="contact-field"><label className="sr-only" htmlFor="name">Name</label><input id="name" name="name" autoComplete="name" required placeholder="Your name" value={form.name} onChange={handleChange} /></div>
-        <div className="contact-field contact-message"><label className="sr-only" htmlFor="message">Message</label><textarea id="message" name="message" rows={3} required placeholder="Tell me what's on your mind" value={form.message} onChange={handleChange} /></div>
-        <button className="send-button" type="submit" disabled={isSubmitting} aria-label={isSubmitting ? 'Sending message' : 'Send message'}>{isSubmitting ? <Loader2 size={16} className="spinner" /> : <ArrowRight size={16} />}</button>
-        {submitStatus && <p className={submitStatus.success ? 'form-status success' : 'form-status error'} role="status">{submitStatus.message}{!submitStatus.success && <> <a href={emailFallback}>Email me directly</a> at {contactEmail}.</>}</p>}
+    <section id="contact" className="contact-section grid grid-cols-[1fr] gap-[20px] [border-top:1px_solid_var(--line)] [padding:28px_0_32px]">
+      <h2 className="contact-title text-[14px] font-medium">Have something in mind?</h2>
+      <form onSubmit={handleSubmit} className="contact-form flex flex-col gap-[16px]">
+        <div className="contact-field [border-bottom:1px_solid_var(--line)]"><label className="sr-only" htmlFor="name">Name</label><input id="name" name="name" autoComplete="name" required placeholder="Your name" value={form.name} onChange={handleChange} /></div>
+        <div className="contact-field [border-bottom:1px_solid_var(--line)] contact-message [align-items:start]"><label className="sr-only" htmlFor="message">Message</label><textarea id="message" name="message" rows={3} required placeholder="Tell me what's on your mind" value={form.message} onChange={handleChange} /></div>
+        <button className="send-button self-end inline-flex items-center gap-[8px] [border:0] bg-transparent text-ink [padding:2px_0] text-[14px] font-medium [transition:opacity_.2s,_transform_.2s]" type="submit" disabled={isSubmitting} aria-label={isSubmitting ? 'Sending message' : 'Send message'}>{isSubmitting ? <Loader2 size={16} className="spinner [animation:spin_1s_linear_infinite]" /> : <ArrowRight size={16} />}</button>
+        {submitStatus && <p className={`form-status text-[12px] ${submitStatus.success ? 'success' : 'error'}`} role="status">{submitStatus.message}{!submitStatus.success && <> <a href={emailFallback}>Email me directly</a> at {contactEmail}.</>}</p>}
       </form>
     </section>
   );
